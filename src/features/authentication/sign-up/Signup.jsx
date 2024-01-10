@@ -1,37 +1,61 @@
-import React from "react";
-import {
-  ButtonComponent,
-  Input,
-  LinkComponent,
-} from "../../../components/form";
+import React, { useState } from "react";
+import { ButtonComponent, Input } from "../../../components/form";
 import { Box, Typography } from "@mui/material";
-import Signupimage from "../../../assets/images/Signupimage.png";
+import SignupImage from "../../../assets/images/SignupImage.png";
+import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setCredentials } from "../../../store/authSlice";
+import { useNavigate } from "react-router-dom";
 
 export const Signup = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
+  const [password, setPassword] = useState("");
+
+  const onClick = (e) => {
+    e.preventDefault();
+    dispatch(setCredentials({ email, name, password }));
+    navigate("/display");
+  };
+
   return (
     <Box sx={{ display: "flex", px: 20, py: 12 }}>
       <Box>
-        <Box sx={{ pb: 3 }}>
+        <Box pb={3}>
           <Typography variant="h4">Signup</Typography>
         </Box>
         <Box>
-          <Input label="Email" type="email" />
-          <Input label="Name" type="text" />
-          <Input label="Password" type="password" />
+          <Input
+            label="Email"
+            type="email"
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <Input
+            label="Name"
+            type="text"
+            onChange={(e) => setName(e.target.value)}
+          />
+          <Input
+            label="Password"
+            type="password"
+            onChange={(e) => setPassword(e.target.value)}
+          />
           <Box sx={{ display: "flex" }}>
             <Typography variant="h6">Already a member?</Typography>
-            <Box sx={{ pl: 1, pt: 0.6 }}>
-              <LinkComponent href="/" displayname="Login" />
+            <Box pl={1} pt={0.6}>
+              <Link to={"/"}>Login</Link>
             </Box>
           </Box>
-          <Box sx={{ pt: 3 }}>
-            <ButtonComponent buttonname="Signup" />
+          <Box pt={3}>
+            <ButtonComponent buttonName="Signup" onClick={onClick} />
           </Box>
         </Box>
       </Box>
       <Box>
         <Box>
-          <img src={Signupimage} alt="Signupimage" style={{ width: "600px" }} />
+          <img src={SignupImage} alt="imageSignup" style={{ width: "600px" }} />
         </Box>
       </Box>
     </Box>

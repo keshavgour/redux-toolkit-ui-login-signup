@@ -3,14 +3,16 @@ import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import "../../App.css";
 export const Input = (props) => {
+  const { type, label, onChange } = props;
   return (
-    <Box sx={{ pb: 2 }}>
+    <Box pb={2}>
       <TextField
         required
         size="small"
-        type={props.type}
+        type={type}
         variant="outlined"
-        label={props.label}
+        label={label}
+        onChange={onChange}
       />
     </Box>
   );
