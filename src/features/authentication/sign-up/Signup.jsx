@@ -50,6 +50,9 @@ export const Signup = () => {
           </Box>
           <Box pt={3}>
             <ButtonComponent buttonName="Signup" onClick={onClick} />
+            <Box pt={1}>
+              <Link to={"/reactQuery"}>Users Data</Link>
+            </Box>
           </Box>
         </Box>
       </Box>
